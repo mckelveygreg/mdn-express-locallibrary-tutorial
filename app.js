@@ -3,14 +3,20 @@ var express = require('express');
 var compression = require('compression');
 var helmet = require('helmet');
 
+var app = express();
+// Always use protection!
+app.use(helmet());
+
 //Set up mongoose connection
 var mongoose = require('mongoose');
 // admin/password1
-var mongoDB = process.env.MONGODB_URI || 'mongodb://admin:password1@ds018238.mlab.com:18238/local_library';
+var dev_db_url = 'mongodb://admin:password1@ds018238.mlab.com:18238/local_library'
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -19,9 +25,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog'); // imports routes from "catalog" area of site
 
-var app = express();
-// Always use protection!
-app.use(helmet());
+
 
 // compress all routes
 app.use(compression());
