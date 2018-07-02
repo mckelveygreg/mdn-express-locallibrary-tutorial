@@ -10,3 +10,4 @@ This tutorial taught me a lot of lessons!
  - How to debug properly
  - How to deploy using Heroku
 
+All original commits and work was done in my https://github.com/mckelveygreg/mdn-learning-area repo
